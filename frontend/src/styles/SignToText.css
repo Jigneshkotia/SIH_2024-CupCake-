@@ -1,0 +1,156 @@
+.top {
+    position: absolute;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    top: 10%;
+    pointer-events: none;
+}
+
+.translator-container {
+    height: 100vh;
+    padding: 20px 80px;
+    background-color: #00101e;
+    color: #E1E9F1;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.translator-title {
+    font-size: 58px;
+    margin-bottom: 10px;
+    color: rgb(203,255,255);
+    font-family: "Nerko One", cursive;
+    font-weight: 10;
+}
+
+.translator-subtitle {
+    font-size: 24px;
+    margin-bottom: 50px;
+    line-height: 1;
+    color: rgb(203,255,255);
+    font-family: "Source Code Pro", monospace;
+}
+
+.translator-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 10vw;
+}
+
+.recording-section, .translation-section {
+    flex: 1;
+    background-color: #001f3d;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.recording-box, .translation-box {
+    background-color: rgba(14, 42, 69,0.5);
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 200px
+}
+
+.webcam {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.recording-text {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #A0B3C5;
+}
+
+.record-button {
+    background-color:rgb(0, 95, 143);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.record-button:disabled {
+    background-color: rgba(0, 95, 143,0.5);
+    cursor: not-allowed;
+}
+
+.record-button:hover:enabled {
+    background-color: rgba(0, 95, 143,0.5);
+}
+
+.translation-box h2 {
+    font-size: 44px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    color: rgb(203,255,255);
+}
+
+.translation-text {
+    font-size: 16px;
+    color: #A0B3C5;
+    background-color: #081828;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.translation-box {
+    height: 90%;
+}
+
+
+@media (max-width: 480px) {
+    .translator-title {
+        font-size: 24px;
+    }
+
+    .translator-subtitle {
+        font-size: 12px;
+    }
+
+    .record-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    .translation-box h2 {
+        font-size: 20px;
+    }
+
+    .translation-text {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .top {
+        display: none;
+    }
+
+    .translator-container {
+        padding: 20px;
+        height: 100%;
+    }
+
+    .translator-title {
+        font-size: 28px;
+    }
+
+    .translator-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .translator-content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+    }
+}

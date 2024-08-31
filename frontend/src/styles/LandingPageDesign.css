@@ -1,0 +1,151 @@
+/* General Styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .landing-page {
+    background-color: #00101e;
+    color: rgb(203,255,255);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Header Styling */
+  .header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 20px 0;
+    background-color: #00101e;
+    margin: 10px;
+  }
+  
+  .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: "Source Code Pro", monospace;
+  }
+  
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color :rgb(203,255,255) ;
+    font-family: "Source Code Pro", monospace;
+  }
+  
+  .nav a:hover {
+    color: rgba(203,255,255,0.5) ;
+  }
+  
+  .learn {
+    padding: 10px 20px;
+    background-color:rgb(0, 95, 143);
+    font-family: "Source Code Pro", monospace;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .learn:hover {
+    background-color: rgba(0, 95, 143,0.5);
+    color: rgba(255, 255, 255,0.9);
+  }
+  
+  /* Main Content Styling */
+  .main-content {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 1000px;
+  }
+  
+  .main-heading {
+    font-size: 5em;
+    margin-bottom: 30px;
+    line-height: 0.8;
+    font-family: "Nerko One", cursive;
+    font-weight: 10;
+  }
+  
+  .subheading {
+    font-size: 1.4em;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    font-family: "Source Code Pro", monospace;
+  }
+  
+  /* Features Section */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .feature {
+    background-color: #001f3d;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+  }
+  
+  .feature:hover {
+    background-color: rgba(0, 31, 61,0.7);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+  }
+  
+  .icon {
+    font-size: 3em;
+    margin-bottom: 10px;
+  }
+  
+  .feature h3 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+  }
+  
+  .feature p {
+    font-size: 1em;
+    line-height: 1.5;
+    word-spacing: -1px;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .header {
+      margin: 30px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 0;
+    }
+  
+    .nav {
+      margin-top: 10px;
+    }
+  
+    .nav a {
+      display: none;
+    }
+  
+    .main-heading {
+      font-size: 2.2em;
+      margin-bottom: 35px;
+    }
+  
+    .subheading {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      line-height: 1;
+    }
+  
+    .get-started {
+      align-self: flex-start;
+    }
+  }
