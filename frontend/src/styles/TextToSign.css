@@ -81,12 +81,31 @@
 }
 
 .models-section {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   width: 85%;
   justify-content: center;
   margin-top: 5vh;
+}
+
+.options {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option-buttons {
+  width: 20%;
+  margin: 10px;
+  height: 4vh;
+  border-radius: 20vh;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.option-buttons:hover {
+  background-color: black;
+  color: white;
 }
 
 .abc {
