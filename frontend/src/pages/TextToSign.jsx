@@ -65,7 +65,7 @@ function TextToSign() {
       case '3D':
         return <ThreeD_Component />;
       case 'Videos':
-        return <Videos_Component />;
+        return <Videos_Component text={text} />;
       case 'Letters':
         return <Letters_Component text={text} />;
       default:

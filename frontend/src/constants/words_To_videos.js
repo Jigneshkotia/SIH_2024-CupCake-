@@ -23,4 +23,5 @@ export const WordVideoMapping = {
     woman : "./wordVideos/woman.mp4",
     yesterday : "./wordVideos/yesterday.mp4",
     you : "./wordVideos/you.mp4",
+    u : "./wordVideos/you.mp4",
 }
