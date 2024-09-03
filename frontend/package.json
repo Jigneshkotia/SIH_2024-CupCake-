@@ -12,6 +12,8 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/holistic": "^0.5.1675471629",
     "@mui/icons-material": "^6.0.0",
     "@mui/material": "^6.0.0",
     "@mui/styled-engine": "^6.0.0",
