@@ -17,11 +17,11 @@ const SignToText = () => {
     });
 
     holistic.setOptions({
-        modelComplexity: 1,
-        smoothLandmarks: true,
+        modelComplexity: 0,
+        smoothLandmarks: false,
         enableSegmentation: false,
         smoothSegmentation: true,
-        refineFaceLandmarks: true,
+        refineFaceLandmarks: false,
         minDetectionConfidence: 0.5,
         minTrackingConfidence: 0.5,
     });

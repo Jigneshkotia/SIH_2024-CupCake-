@@ -1,36 +1,8 @@
-# from flask import Flask, request, jsonify
-# from flask_cors import CORS
-# import os
-
-# app = Flask(__name__)
-# CORS(app)  # This will enable CORS for all routes
-
-# @app.route('/upload', methods=['POST'])
-# def upload_file():
-#     if 'file' not in request.files:
-#         return jsonify({"error": "No file part"})
-    
-#     file = request.files['file']
-    
-#     if file.filename == '':
-#         return jsonify({"error": "No selected file"})
-    
-#     if file:
-#         filename = file.filename
-#         file.save(os.path.join("uploads", filename))
-        
-#         # Process the video and return a sample response
-#         return jsonify({"text": "Processed text from video"})
-    
-# if __name__ == '__main__':
-#     app.run(debug=True)
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense
+from tensorflow.keras.models import load_model
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -39,24 +11,6 @@ CORS(app)  # Enable CORS for all routes
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-
-# def extract_pose_keypoints(results):
-#     pose = np.array([[res.x, res.y, res.z, res.visibility] for res in results.poseLandmarks]).flatten() if results.poseLandmarks else np.zeros(33 * 4)
-#     selected_pose = np.concatenate([pose[:1 * 4], pose[2*4:3*4], pose[5 * 4:6 * 4] ,
-#                                     pose[7 * 4:23 * 4] ]) 
-#     return selected_pose
-
-# l_hand_detected = False
-
-# def extract_lhand_keypoints(results):
-#     global l_hand_detected
-#     if results.left_hand_landmarks:
-#         lhand = np.array([[res.x, res.y, res.z] for res in results.leftHandLandmarks]).flatten()
-#         l_hand_detected = True
-#     else:
-#         lhand = np.zeros(21*3)
-#         l_hand_detected = False
-#     return lhand
 
 def extract_pose_keypoints(results):
     pose_landmarks = results.get('poseLandmarks', [])
@@ -75,26 +29,9 @@ def extract_lhand_keypoints(results):
     else:
         lhand = np.zeros(21 * 3)
         l_hand_detected = False
+    
     return lhand
 
-# r_hand_detected = False
-
-# def extract_rhand_keypoints(results):
-#     global l_hand_detected
-#     if results.right_hand_landmarks:
-#         rhand = np.array([[res.x, res.y, res.z] for res in results.rightHandLandmarks]).flatten()
-#         r_hand_detected = True
-#     else:
-#         rhand = np.zeros(21*3)
-#         r_hand_detected = False
-#     return rhand
-
-# def extract_keypoints(results):
-#     pose = extract_pose_keypoints(results)
-#     face = np.array([[res.x, res.y, res.z] for res in results.faceLandmarks]).flatten() if results.face_landmarks else np.zeros(468*3)
-#     lh = extract_lhand_keypoints(results)
-#     rh = extract_rhand_keypoints(results)
-#     return np.concatenate([pose, face, lh, rh])
 
 r_hand_detected = False
 
@@ -107,6 +44,8 @@ def extract_rhand_keypoints(results):
     else:
         rhand = np.zeros(21 * 3)
         r_hand_detected = False
+
+    
     return rhand
 
 def extract_keypoints(results):
@@ -114,25 +53,18 @@ def extract_keypoints(results):
     lhand = extract_lhand_keypoints(results)
     rhand = extract_rhand_keypoints(results)
     face_landmarks = results.get('faceLandmarks', [])
+    print("Face landmarks len = ",len(face_landmarks))
     face = np.array([[res['x'], res['y'], res['z']] for res in face_landmarks]).flatten() if face_landmarks else np.zeros(468*3)
+    print("Face len = ",len(face))
+    # print("pose len = ",len(pose))
+    # print("lhand len",len(lhand))
+    # print("rhand len",len(rhand))
     return np.concatenate([pose,face, lhand, rhand])
 
 actions = np.array(['Aeroplane','Blind','Daughter','I','India','Son','Book','Fish','Thank You','Love','Sad'])
 
 
-model = Sequential()
-model.add(LSTM(26, return_sequences=True, activation='relu', input_shape=(30,1606)))
-model.add(LSTM(100, return_sequences=True, activation='relu'))
-model.add(LSTM(60, return_sequences=False, activation='relu'))
-model.add(Dense(52, activation='relu'))
-model.add(Dense(200, activation='relu'))
-model.add(Dense(120, activation='relu'))
-model.add(Dense(240, activation='relu'))
-model.add(Dense(120, activation='relu'))
-model.add(Dense(200, activation='relu'))
-model.add(Dense(52, activation='relu'))
-model.add(Dense(26, activation='relu'))
-model.add(Dense(actions.shape[0], activation='softmax'))
+model = load_model('workingmodelv1.h5')
 
 
 
@@ -177,6 +109,8 @@ def sign_to_text(results):
 
             if len(sentence) >2: 
                 sentence = sentence[-2:]
+
+            print(sentence)
             return sentence
             
         
@@ -189,21 +123,24 @@ def upload_keypoints():
         # Parse the incoming JSON data
         data = request.json
         keypoints = data.get('keypoints')
+        print(keypoints.keys())
+        # print(keypoints['poseLandmarks'])
+        # print(keypoints['leftHandLandmarks'])
+        # print(keypoints['rightHandLandmarks'])
+        # print(keypoints['faceLandmarks'])
+        # print(len(keypoints['poseLandmarks']))
+        # print(len(keypoints['leftHandLandmarks']))
+        # print(len(keypoints['rightHandLandmarks']))
+        # print(len(keypoints['faceLandmarks']))
 
         # print(keypoints)
 
         # Log the received keypoints to verify
         # print('Received keypoints:', keypoints)
         keypoints=extract_keypoints(keypoints)
-        print(keypoints)
+        # print(keypoints)
 
 
-
-        # Here you can process the keypoints data and perform any necessary operations
-        # For example, you might want to run a model on the keypoints data
-
-        # Simulate a translation result
-        # translated_text = 'Simulated translation text based on received keypoints'
         translated_text = sign_to_text(keypoints)
 
         # Respond with the translation result
