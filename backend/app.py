@@ -53,9 +53,9 @@ def extract_keypoints(results):
     lhand = extract_lhand_keypoints(results)
     rhand = extract_rhand_keypoints(results)
     face_landmarks = results.get('faceLandmarks', [])
-    print("Face landmarks len = ",len(face_landmarks))
+    # print("Face landmarks len = ",len(face_landmarks))
     face = np.array([[res['x'], res['y'], res['z']] for res in face_landmarks]).flatten() if face_landmarks else np.zeros(468*3)
-    print("Face len = ",len(face))
+    # print("Face len = ",len(face))
     # print("pose len = ",len(pose))
     # print("lhand len",len(lhand))
     # print("rhand len",len(rhand))
@@ -89,7 +89,7 @@ def sign_to_text(results):
         
         if len(sequence) == 30:
             res = model.predict(np.expand_dims(sequence, axis=0))[0]
-            print(actions[np.argmax(res)])
+            # print(actions[np.argmax(res)])
             predictions.append(np.argmax(res))
 
             
@@ -110,7 +110,7 @@ def sign_to_text(results):
             if len(sentence) >2: 
                 sentence = sentence[-2:]
 
-            print(sentence)
+            # print(sentence)
             return sentence
             
         
@@ -123,20 +123,8 @@ def upload_keypoints():
         # Parse the incoming JSON data
         data = request.json
         keypoints = data.get('keypoints')
-        print(keypoints.keys())
-        # print(keypoints['poseLandmarks'])
-        # print(keypoints['leftHandLandmarks'])
-        # print(keypoints['rightHandLandmarks'])
-        # print(keypoints['faceLandmarks'])
-        # print(len(keypoints['poseLandmarks']))
-        # print(len(keypoints['leftHandLandmarks']))
-        # print(len(keypoints['rightHandLandmarks']))
-        # print(len(keypoints['faceLandmarks']))
-
-        # print(keypoints)
-
-        # Log the received keypoints to verify
-        # print('Received keypoints:', keypoints)
+        # print(keypoints.keys())
+       
         keypoints=extract_keypoints(keypoints)
         # print(keypoints)
 
