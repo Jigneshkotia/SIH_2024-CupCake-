@@ -37,6 +37,7 @@ const VideoAnimate = ({text}) => {
           width="800"
           // height="600"
           autoPlay
+          controls
           muted
           onEnded={handleVideoEnd}
           style={{ overflow:"hidden" }}
