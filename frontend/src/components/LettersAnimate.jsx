@@ -35,11 +35,11 @@ const Letters_Component = ({ text }) => {
   
 
   return (
-    <div style={{ border: '1px solid #ccc', padding: '20px', minHeight: '150px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ padding: '20px', minHeight: '150px', display: 'flex', justifyContent: 'center', alignItems: 'center', height:'100%', width:'100%' }}>
       {currentPhoto ? (
-        <div style={{ display:"flex", flexDirection:"column", alignItems:"center" }}>
-          <img src={currentPhoto} style={{ width: '100px', height: '100px' }} alt={text[currentIndex]} />
-          <div>{text[currentIndex]}</div>
+        <div style={{ display:"flex", flexDirection:"column", alignItems:"center",height:'100%', width:'100%' }}>
+          <img src={currentPhoto} style={{ width: '80%', height: '80%', borderRadius:'5vh' }} alt={text[currentIndex]} />
+          <div style={{fontSize:'5rem' , fontWeight:'900'}} >{text[currentIndex] ? text[currentIndex].toUpperCase() : text[currentIndex]}</div>
         </div>
       ) : (
         <span>No corresponding photo</span>
