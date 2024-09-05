@@ -16,7 +16,10 @@ const ThreeDAnimate = ({text}) => {
         <Suspense fallback={null}>
           <Model scale={[5,5,5]} position={[0,-6.5,0]} />
         </Suspense>
-        <OrbitControls />
+        <OrbitControls 
+          minDistance={5}  
+          maxDistance={10}  
+        />
       </Canvas>
     );
   }
