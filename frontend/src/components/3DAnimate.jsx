@@ -13,7 +13,7 @@ const ThreeDAnimate = () => {
           <ambientLight intensity={1.5} /> ̰
           <directionalLight position={[5, 5, 5]} />
           <Suspense fallback={null}>
-            <Model scale={[5,5,5]} position={[0,-6,0]} />
+            <Model scale={[5,5,5]} position={[0,-5,0]} />
           </Suspense>
           <OrbitControls />
         </Canvas>
