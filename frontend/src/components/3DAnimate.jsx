@@ -7,16 +7,21 @@ const Model = ({ scale,position }) => {
   return <primitive object={scene} scale={scale} position={position} />;
 };
 
-const ThreeDAnimate = () => {
+const ThreeDAnimate = ({text}) => {
+  if(text.toLowerCase() == 'thankyou') {
     return (
-        <Canvas>
-          <ambientLight intensity={1.5} /> ̰
-          <directionalLight position={[5, 5, 5]} />
-          <Suspense fallback={null}>
-            <Model scale={[5,5,5]} position={[0,-6.5,0]} />
-          </Suspense>
-          <OrbitControls />
-        </Canvas>
+      <Canvas>
+        <ambientLight intensity={1.5} /> ̰
+        <directionalLight position={[5, 5, 5]} />
+        <Suspense fallback={null}>
+          <Model scale={[5,5,5]} position={[0,-6.5,0]} />
+        </Suspense>
+        <OrbitControls />
+      </Canvas>
+    );
+  }
+    return (
+        <div>No animation to the word : {text}</div>
       );
 }
 
