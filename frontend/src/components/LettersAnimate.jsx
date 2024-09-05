@@ -14,7 +14,7 @@ const Letters_Component = ({ text }) => {
   }, [text]);
 
   useEffect(() => {
-    if (text && currentIndex < text.length) {
+    if (text && currentIndex < text.length-1) {
       if (!showBlank) {
         // Show the current letter
         const letter = text[currentIndex].toLowerCase();
@@ -27,7 +27,11 @@ const Letters_Component = ({ text }) => {
         }, 1000); // Delay for showing the letter
 
         return () => clearTimeout(timer);
-      } else {
+      }
+      // else if(currentIndex ==text.length-1){
+      //   setCurrentPhoto(null); 
+      // } 
+      else {
         // Blank display
         const timer = setTimeout(() => {
           setCurrentIndex((prevIndex) => prevIndex + 1); // Move to the next letter
